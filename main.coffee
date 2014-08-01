@@ -17,7 +17,12 @@ colors = ["red", "blue", "green"] # 1, t, t^2
 
 # Alias quadratic f(t)
 f_coeff = (k) -> [k, k/2, 1-k/2]
-f = (t, k) -> f_coeff(k).dot([1, t, t*t])
+f = (t, k) ->
+	z = numeric.dot(f_coeff(k), [1, t, t*t])
+	#z = f_coeff(k).dot([1, t, t*t])
+	#console.log "z", f_coeff(k), [1, t, t*t], z
+	#z
+	
 
 # Function text
 f_text = (k) ->
@@ -97,6 +102,7 @@ Alias = (k) ->
         .attr("transform", "translate(-25,0)")
         .call(f_axis)
 
+    #console.log "fdata", fdata, @f_svg(fdata)
     @graph.append("path")
         .attr("d", @f_svg(fdata))
         .attr("id","poly")

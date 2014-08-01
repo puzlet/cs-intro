@@ -36,7 +36,8 @@
   };
 
   f = function(t, k) {
-    return f_coeff(k).dot([1, t, t * t]);
+    var z;
+    return z = numeric.dot(f_coeff(k), [1, t, t * t]);
   };
 
   f_text = function(k) {
