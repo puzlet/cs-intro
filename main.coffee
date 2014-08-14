@@ -17,12 +17,7 @@ colors = ["red", "blue", "green"] # 1, t, t^2
 
 # Alias quadratic f(t)
 f_coeff = (k) -> [k, k/2, 1-k/2]
-f = (t, k) ->
-	z = numeric.dot(f_coeff(k), [1, t, t*t])
-	#z = f_coeff(k).dot([1, t, t*t])
-	#console.log "z", f_coeff(k), [1, t, t*t], z
-	#z
-	
+f = (t, k) -> z = f_coeff(k).dot([1, t, t*t])
 
 # Function text
 f_text = (k) ->
