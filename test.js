@@ -1,5 +1,5 @@
 function foo() {
-	console.log("This is a test");
+	console.log("This is a test");  // $x_n$
 }
 
 foo();
