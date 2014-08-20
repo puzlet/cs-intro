@@ -2,6 +2,7 @@
 	"main.html",
 	"main.css",
 	"main.coffee",
+	"test_eval.coffee",
 	"test.js",
 	"test.py",
 	"test.m",
