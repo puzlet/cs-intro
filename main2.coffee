@@ -1,1 +1,1 @@
-my new file contents
+x = 10
