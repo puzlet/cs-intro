@@ -29,7 +29,8 @@ For the quadratic, sparsity can mean it is __either__
 a constant ($f(t)=a_0$), a line ($f(t)=a_1t$) or a parabola ($f(t)=a_2t^2$) 
 (but we don't know which!). 
 
-Many signals in applications are sparse. Essentially, a signal is sparse 
+<span class="pz_text" ref="three_col_note">Many signals</span> 
+in applications are sparse. Essentially, a signal is sparse 
 if we can find a way of representing it that involves  many zeros 
 (without needing know exactly what is zero). For instance, 
 mobile phone signals may occupy about 1 MHz, somewhere within a band of 
@@ -40,6 +41,10 @@ In the box below we see that we can recover $f(t)=a_0+a_1 t +a_2 t^2$
 from only *two* samples---if we know that it has only one non-zero
 coefficient (i.e., is 1-sparse).
 
+</div>
+
+<div class="pz_note" id="three_col_note">
+E.g., This is some fancy note $x_n$. [http://puzlet.org Puzlet]
 </div>
 
 <div id="clear"></div>
@@ -123,8 +128,6 @@ Thus, we can *find* $\ell_0=1$ (i.e., the sparse solution) by minimizing $\ell_1
 </div>
    
 <div id="clear"></div>
-
-
 
 <div id="left_col">
 CoffeeScript:
