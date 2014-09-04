@@ -8,9 +8,10 @@
 	"test.js",
 	"test.py",
 	"test.m",
-	"/puzlet/js/d3.min.js",
+	{"js": "/puzlet/js/d3.min.js"},
 	"http://puzlet.org/ode-fixed/main.coffee",
 	"http://puzlet.org/line-chart/main.coffee",
 	"http://mathblab.github.io/grand-challenge/arrays.coffee",
-	"https://api.github.com/repos/metormote/iopctrl/contents/iopctrl.js"
+	"https://api.github.com/repos/metormote/iopctrl/contents/iopctrl.js",
+	{"url": "data.json", "id": "mydata"}
 ]
