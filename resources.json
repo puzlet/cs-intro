@@ -1,6 +1,8 @@
 [
 	"main.html",
+	"slides.html",
 	"main.css",
+	"slides.css",
 	"main.coffee",
 	"main2.coffee",
 	"test_eval.coffee",
@@ -13,5 +15,6 @@
 	"http://puzlet.org/line-chart/main.coffee",
 	"http://mathblab.github.io/grand-challenge/arrays.coffee",
 	"https://api.github.com/repos/metormote/iopctrl/contents/iopctrl.js",
-	{"url": "data.json", "id": "mydata"}
+	{"url": "data.json", "id": "mydata"},
+	"http://puzlet.org/utility/combnk/combnk.coffee"
 ]

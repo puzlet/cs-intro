@@ -1,0 +1,394 @@
+<div id="slides" style="display: none;">
+
+
+<div class="pz_slide" id="slide_toc" section="introduction">
+===Compressive Sensing===
+<div class="pz_slide_toc">
+Table of contents:
+* <a href="#introduction">Introduction</a>
+* <a href="#overview">Overview</a>
+* <a href="#solving">Solving the Riddle</a>
+* <a href="#significance">Significance of the Riddle</a>
+* <a href="#two_important_bases">Two Important Bases</a>
+* <a href="#sensing_coordinates">Sensing Coordinates</a>
+* <a href="#sparsity_basis">Sparsity Basis Projections</a>
+* <a href="#aliases">K-Sparse Aliases</a>
+* <a href="#key_equation">Key Equation</a>
+* <a href="#reconstruction">Practical Reconstruction</a>
+* <a href="#extensions">Summary and Extensions</a>
+
+<span class="pz_text" ref="slide_tips">(Keyboard shortcuts and tips)</span>
+</div>
+
+<div class="pz_note" id="slide_tips">
+<!--div class="pz_slide_tips"-->
+<div style="font-size: 10pt;">
+* *Esc*: Close/open slides window.
+* *Left/right*: Navigate slides.
+* *Up/down*: Scroll main page.
+* *Return*: Go to corresponding section in main page.
+* Links navigate between slides and main page.
+* Drag window anywhere on page.  
+</div>
+</div>
+</div>
+
+
+<div class="pz_slide" id="slide_introduction" section="introduction">
+<div class="pz_slide_heading">
+===Polynomial Riddle===
+</div>
+<div class="pz_slide_body">
+<img src="riddle.svg">
+* Three polynomial signals.  I pick one.
+* Which samples do you need to correctly determine the signal?
+* Just <span style="color: red;">red</span> and 
+<span style="color: blue;">blue</span> samples? All three samples?
+</div>
+</div>
+
+<div class="pz_slide" id="slide_overview" section="overview">
+<div class="pz_slide_heading">
+===Overview===
+</div>
+<style>.overview td {background:#ddd;}</style>
+<div class="pz_slide_body">
+* Promise of CS: transmit or store signals using fewer bits.
+* Represent one signal according to two *bases*.
+<br><br>
+<table class="overview" width="400" cellpadding="4">
+<th>Basis<th>Coordinates
+<tr><td>1. Sparsity<td>At least one zero coefficient
+<tr><td>2. Sensing<td>At least one redundant coefficient
+</table><br>
+
+* Polynomial example, $f(t)=x_0+x_1 t+ x_2 t^2$:
+<table class="overview" width="480" cellpadding="4">
+<th>Representation<th>Basis<th>Coordinates
+<tr>
+<td>1. Sparsity
+<td>$\{1,t,t^2\}$
+<td>$[x_0~x_1~x_2]^T$ (one non-zero)
+<tr>
+<td>2. Sensing
+<td>Lagrange
+<td>Sample values
+</table>
+</div>
+</div>
+
+
+<div class="pz_slide" id="slide_solving" section="solving">
+<div class="pz_slide_heading">
+=== Solving the Riddle ===
+</div>
+<div class="pz_slide_body" style="margin-top: -10px;">
+<img src="riddle.svg">
+* 3 samples unambiguously distinguish __any__ quadratic polynomial.
+* 2 samples?
+** <span style="color: blue;">blue</span> and 
+<span style="color: green;">green</span>:
+line and parabola agree for $x_1=2x_2$.
+** <span style="color: red;">red</span> and
+<span style="color: blue;">blue</span>:
+line and parabola agree for $x_1=-x_2$.
+** <span style="color: red;">red</span> and 
+<span style="color: green;">green</span>: <b>no two signals ever agree</b>
+<br/>(for any $x_0$, $x_1$, $x_2$).
+
+* *No 1-sparse aliases using the <span style="color: red;">red</span> and 
+<span style="color: green;">green</span> samples*. 
+    
+</div>
+</div>
+
+
+<div class="pz_slide" id="slide_significance" section="significance">
+<div class="pz_slide_heading">
+=== Significance of the Riddle ===
+</div>
+<div class="pz_slide_body">
+
+* Two samples is __compression__. 
+** Sparsity *enables* compression.
+** Compression requires absence of K-Sparse aliases
+* Periodic functions are (trigonometric) polynomials.
+** Useful in applications.
+** E.g., signals with sparse frequency spectrum.
+* Two samples is __sub-Nyquist__ 
+** But, sparsity is *severe* constraint.
+* The key is a *pair of bases*: sparse and compressible.
+
+</div>
+</div>
+
+
+<div class="pz_slide" id="slide_twobases_2" section="two_important_bases">
+<div class="pz_slide_heading">
+=== Two Important Bases ===
+<p class="subslide">(Slide 2 of 2)</p>
+</div>
+<div class="pz_slide_body">
+
+==== Sensing Basis ====
+
+* Coefficients (sensed) from measurements
+* Prototype: *Lagrange* basis 
+** Coefficients are sample values.
+** Basis polynomials unity at one instant, zero at others.
+** Plot is for sampling instants $\{-1,0,2\}$
+
+<img src="lagrange_basis.svg">
+
+</div>
+</div>
+
+
+<div class="pz_slide" id="slide_sensing_coordinates_1" 
+    section="sensing_coordinates" codenodes="270,209,235">
+<div class="pz_slide_heading">
+=== Sensing Coordinates ===
+<p class="subslide">(Slide 1 of 3)</p>
+</div>
+
+<div class="pz_slide_left_panel_one_third" style="padding-top: 0px">
+==== Constant ====
+* Shown in black:
+** $f(t)=1$
+* Each sample value has an axis (see inset).
+</div>
+
+<div class="pz_slide_right_panel_two_thirds" 
+    style="padding-top: 0px;">
+<div style="margin-left: -100px;">
+<img src="geom_1.svg" height="420px">
+</div>
+</div>
+
+</div>
+
+
+<div class="pz_slide" id="slide_sensing_coordinates_2"
+    section="sensing_coordinates" codenodes="270,209,210,241">
+<div class="pz_slide_heading">
+=== Sensing Coordinates ===
+<p class="subslide">(Slide 2 of 3)</p>
+</div>
+
+<div class="pz_slide_left_panel_one_third" style="padding-top: 0px">
+==== Constant & Line ====
+* Shown in black: 
+** $f(t)=1$ 
+** $f(t)=t$
+</div>
+
+<div class="pz_slide_right_panel_two_thirds" style="padding-top: 0px;">
+<div style="margin-left: -143px;">
+<img src="geom_2.svg" height="420px">
+</div>
+</div>
+
+</div>
+
+
+<div class="pz_slide" id="slide_sensing_coordinates_3" 
+    section="sensing_coordinates" codenodes="270,209,210,211,242">
+<div class="pz_slide_heading">
+=== Sensing Coordinates ===
+<p class="subslide">(Slide 3 of 3)</p>
+</div>
+
+<div class="pz_slide_left_panel_one_third" style="padding-top: 0px">
+==== Constant & Line & Parabola ====
+* Shown in black: 
+** $f(t)=1$
+** $f(t)=t$ 
+** $f(t)=t^2$
+
+</div>
+
+<div class="pz_slide_right_panel_two_thirds" style="padding-top: 0px;">
+<div style="margin-top: -9px; margin-left: -143px;">
+<img src="geom_3.svg" height="429px">
+</div>
+</div>
+
+</div>
+
+
+<div class="pz_slide" id="slide_sparsity_basis" 
+    section="sparsity_basis" codenodes="212,243">
+<div class="pz_slide_heading">
+=== Sparsity Basis Projections ===
+</div>
+
+<div class="pz_slide_left_panel_one_third" style="padding-top: 0px">
+* Project sparsity basis elements onto $b_0$,$b_2$ plane.
+* Each projection has only two coordinates.
+
+    
+</div>
+
+<div class="pz_slide_right_panel_two_thirds" style="padding-top: 28px;">
+<div style="margin-left: -100px;">
+<img src="geom_4.svg" height="420px">
+</div>
+</div>
+
+</div>
+
+
+<div class="pz_slide" id="slide_aliases_1" 
+    section="aliases" codenodes="215,236">
+<div class="pz_slide_heading">
+=== Aliases ===
+</div>
+
+<div class="pz_slide_left_panel_one_third" style="padding-top: 60px">
+* Project sparsity basis onto 
+$\color{red}{b_0}$,$\color{green}{b_2}$ plane.
+* $\begin{bmatrix}1\\1\end{bmatrix}$, $\begin{bmatrix}-1\\2\end{bmatrix}$,
+$\begin{bmatrix}1\\4\end{bmatrix}$
+* Each <font color="#C0C000">projection</font> is distinct.
+* Need *two* projections to alias another.
+* Impossible since *1-sparse*.
+    
+</div>
+
+<div class="pz_slide_right_panel_two_thirds" style="padding-top: 40px;">
+<div style="margin-left: -25px;">
+<img src="spark_1.svg" height="350px">
+</div>
+</div>    
+
+</div>
+
+
+<div class="pz_slide" id="slide_key_equation" section="key_equation">
+<div class="pz_slide_heading">
+===Key equation: $Ax=b$===
+</div>
+<div class="pz_slide_body">
+* Columns of $A$ are *sparsity basis projections* 
+($\mathcal{SB}$-projections)
+** E.g., $A=\begin{bmatrix}1&-1&1\\1&2&4\end{bmatrix}$ from last  slide.
+
+* $x$ = *sparsity coordinates*, $[x_0,...,x_N]^T$ (only $K$ non-zero)
+
+* $Ax$ = combination of $\mathcal{SB}$-projections = *signal's projection* = $b$
+
+* $b$ = *compressed sampling coordinates* ($b=[b_0,...,b_M]^T$)
+
+* $Ax=b$ *under determined* (fewer rows than columns).
+** Unique solution if no fewer than $2K+1$ columns of $A$ combine to zero
+($2K+1=3$ above).
+** i.e., $\mathrm{spark}(A) \geq 2K+1$
+</div>
+</div>
+
+
+<div class="pz_slide" id="slide_reconstruction_1" 
+    section="reconstruction" codenodes="196,207,238">
+<div class="pz_slide_heading">
+=== Reconstruction ===
+<p class="subslide">(Slide 1 of 4)</p>
+</div>
+<div class="pz_slide_body" style="margin-top: -30px;">
+<img src="recon1_1.svg" height="460px">
+</div>
+</div>
+
+
+<div class="pz_slide" id="slide_reconstruction_2"
+    section="reconstruction" codenodes="196,207,203,250">
+<div class="pz_slide_heading">
+=== Reconstruction ===
+<p class="subslide">(Slide 2 of 4)</p>
+</div>
+<div class="pz_slide_body" style="margin-top: -30px;">
+<img src="recon1_2.svg" height="460px">
+</div>
+</div>
+
+
+<div class="pz_slide" id="slide_reconstruction_3"
+    section="reconstruction" codenodes="196,207,203,204,249">
+<div class="pz_slide_heading">
+=== Reconstruction ===
+<p class="subslide">(Slide 3 of 4)</p>
+    
+</div>
+<div class="pz_slide_body" style="margin-top: -32px;">
+<img src="recon1_3.svg" height="460px">
+</div>
+</div>
+
+
+<div class="pz_slide" id="slide_reconstruction_4" 
+    section="reconstruction" codenodes="197,208,254">
+<div class="pz_slide_heading">
+=== Reconstruction ===
+<p class="subslide">(Slide 4 of 4)</p>
+</div>
+
+<div class="pz_slide_left_panel_one_third" style="padding-top: 40px">
+* Traverse solutions of $Ax=b$
+* $\color{blue}{\ell_0}$-norm difficult
+* $\color{red}{\ell_2}$-norm inaccurate
+* $\color{green}{\ell_1}$-norm just right    
+</div>
+
+<div class="pz_slide_right_panel_two_thirds" style="padding-top: 10px;">
+<div style="margin-left: -50px;">
+<img src="norms.svg" height="350px">
+</div>
+</div>
+
+</div>
+
+
+<div class="pz_slide" id="slide_extensions" section="extensions">
+<div class="pz_slide_heading">
+=== Extensions ===
+    
+</div>
+<div class="pz_slide_body">
+
+Bridging the gap between intuition and applications:
+* the relationship between bases
+* uniform sampling (i.e., if you can't choose sampling instants)
+* the signal class (e.g., periodic signals)
+* the effect of noise
+* choosing bases for large-scale applications
+* computational tools
+
+Companion module <a href="/?id=b0080" target="_blank">Compressive 
+Sensing Primer</a> addresses these areas.
+</div>
+</div>
+
+
+<div class="pz_slide" id="slide_references">
+<div class="pz_slide_heading">
+===References===
+</div>
+
+<ol class="bib">
+
+1. Bruckstein, A.M.; Donoho, D.L.; Elad, M., 
+"[http://citeseer.ist.psu.edu/viewdoc/summary?doi=10.1.1.102.4697,
+From Sparse Solutions of Systems of Equations to Sparse Modelling of 
+Signals and Images]," SIAM Review, Vol.51, No.1, pp.34,81.
+
+1. Engelberg, S., 
+"[http://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6145261&isnumber=6145243,
+"Compressive sensing (Instrumentation Notes)]," 
+Instrumentation & Measurement Magazine, IEEE , 
+vol.15, no.1, pp.42,46, February 2012.
+
+</ol>
+
+</div>
+
+
+</div>
