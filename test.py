@@ -1,2 +1,4 @@
 def foo() :
-	x = 2+2
+	# This is a comment
+	x = 2+2  # Comment
+# On own line

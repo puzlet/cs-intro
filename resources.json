@@ -5,6 +5,7 @@
 	"slides.css",
 	"main.coffee",
 	"main2.coffee",
+	"test_split.coffee",
 	"test_eval.coffee",
 	"test_eval_2.coffee",
 	"test.js",

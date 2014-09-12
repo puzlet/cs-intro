@@ -1,2 +1,4 @@
 function foo()
-	return 2+2
+	% This is a comment
+	return 2+2  % comment
+% on own line
