@@ -185,17 +185,37 @@ This is a whole lot of text.
 
 <div id="clear"></div>
 
-Split CoffeeScript:
-<div data-file="test_split.coffee" data-split></div>
+<div id="left_col">
+CoffeeScript viewports:
+<div data-file="test_split.coffee" data-start-match="x = 1" data-end-match="y = 3"></div>
+</div>
 
-Split Octave:
+<div id="right_col">
+Eval:
+<div data-eval="test_split.coffee"></div>
+</div>
+
+<div id="clear"></div>
+
+<div id="left_col">
+CoffeeScript viewports:
+<div data-file="test_split.coffee" data-start-match="y = 3"></div>
+</div>
+
+<div id="right_col">
+Eval:
+<div data-eval="test_split.coffee"></div>
+</div>
+
+<div id="clear"></div>
+
+Octave viewports:
 <div data-file="test_split.m" data-end-match="y = 3"></div>
 Some text in between.
 <div data-file="test_split.m" data-start-match="initialize \$x\$"></div>
 
 Full Octave file:
 <div data-file="test_split.m"></div>
-
 
 <div id="clear"></div>
 
